@@ -28,6 +28,14 @@ bool AShooterAIController::isDead() const
     }
 }
 
+void AShooterAIController::GameEnded()
+{
+    if(EnemyAI != nullptr)
+    {
+        GetBlackboardComponent()->SetValueAsBool(TEXT("IsGameOver"), true);
+    }
+}
+
 void AShooterAIController::BeginPlay()
 {
     Super::BeginPlay();
@@ -39,6 +47,7 @@ void AShooterAIController::BeginPlay()
         RunBehaviorTree(EnemyAI);
         GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
         GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation());
+        GetBlackboardComponent()->ClearValue(TEXT("IsGameOver"));
     }
 }
 

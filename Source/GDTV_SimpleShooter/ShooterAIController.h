@@ -18,6 +18,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool isDead() const;
+
+	void GameEnded();
 	
 protected:
 	// Called when the game starts or when spawned
