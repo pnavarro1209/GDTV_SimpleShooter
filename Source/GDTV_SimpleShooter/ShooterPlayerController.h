@@ -15,7 +15,11 @@ class GDTV_SIMPLESHOOTER_API AShooterPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
+	
 	void EndGameUI();
+
+	UFUNCTION(BlueprintCallable)
+	void OpenHUD();
 	
 protected:
 	virtual void GameHasEnded(AActor* EndGameFocus, bool bIsWinner) override;

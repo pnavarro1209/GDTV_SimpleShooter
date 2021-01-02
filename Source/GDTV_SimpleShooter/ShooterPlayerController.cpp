@@ -15,6 +15,16 @@ void AShooterPlayerController::EndGameUI()
     EndScreen->AddToViewport();
 }
 
+void AShooterPlayerController::OpenHUD()
+{
+    HUDWidget = CreateWidget(this, HUDClass);
+
+    if(HUDWidget != nullptr)
+    {
+        HUDWidget->AddToViewport();
+    }
+}
+
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
 {
     Super::GameHasEnded(EndGameFocus, bIsWinner);
@@ -45,10 +55,5 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 
 void AShooterPlayerController::BeginPlay()
 {
-    HUDWidget = CreateWidget(this, HUDClass);
-        
-    if(HUDWidget != nullptr)
-    {
-        HUDWidget->AddToViewport();
-    }
+    Super::BeginPlay();
 }
