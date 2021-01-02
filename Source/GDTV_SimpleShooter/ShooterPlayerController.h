@@ -14,6 +14,9 @@ class GDTV_SIMPLESHOOTER_API AShooterPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+public:
+	void EndGameUI();
+	
 protected:
 	virtual void GameHasEnded(AActor* EndGameFocus, bool bIsWinner) override;
 
@@ -26,6 +29,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> WinScreenClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> EndScreenClass;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> HUDClass;
