@@ -4,6 +4,26 @@
 #include "ShooterPlayerController.h"
 #include "TimerManager.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
+
+void AShooterPlayerController::EndGameUI()
+{
+    StopMovement();
+
+    UUserWidget* EndScreen = CreateWidget(this, EndScreenClass);
+
+    EndScreen->AddToViewport();
+}
+
+void AShooterPlayerController::OpenHUD()
+{
+    HUDWidget = CreateWidget(this, HUDClass);
+
+    if(HUDWidget != nullptr)
+    {
+        HUDWidget->AddToViewport();
+    }
+}
 
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
 {
@@ -29,17 +49,11 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
             LoseScreen->AddToViewport();
         }
     }
-    
 
-    GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartTime);
+    GetWorldTimerManager().SetTimer(RestartTimer, this, &AShooterPlayerController::EndGameUI, RestartTime);
 }
 
 void AShooterPlayerController::BeginPlay()
 {
-    HUDWidget = CreateWidget(this, HUDClass);
-        
-    if(HUDWidget != nullptr)
-    {
-        HUDWidget->AddToViewport();
-    }
+    Super::BeginPlay();
 }
